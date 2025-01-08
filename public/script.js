@@ -111,32 +111,38 @@ async function handleFeedbackClick(e) {
     currentX = e.clientX - rect.left;
     currentY = e.clientY - rect.top;
 
+    const iframe = document.getElementById('target-website');
+    const iframeUrl = iframe.src;
+
     // Skapa elementinfo
     const elementInfo = {
         x: currentX,
         y: currentY,
         timestamp: new Date().toISOString(),
-        url: document.getElementById('target-website').src,
+        url: iframeUrl,  // Använd iframe.src direkt
         elementDescription: ''
     };
 
     try {
         showLoading('Tar skärmdump...');
-        console.log('Requesting screenshot...');
-        const response = await fetch('/api/screenshot', {
+        console.log('Requesting screenshot...', { url: iframeUrl, x: currentX, y: currentY });
+        
+        const response = await fetch('http://localhost:3001/api/screenshot', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                url: elementInfo.url,
-                x: currentX,
-                y: currentY
+                url: iframeUrl,
+                x: parseInt(currentX),  // Säkerställ att dessa är nummer
+                y: parseInt(currentY)
             })
         });
         
         if (!response.ok) {
-            throw new Error(`Server error: ${await response.text()}`);
+            const errorText = await response.text();
+            console.error('Screenshot response error:', errorText);
+            throw new Error(`Server error: ${errorText}`);
         }
         
         const data = await response.json();
