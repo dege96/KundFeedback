@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div id="url-input-container" class="url-container">
+        <div class="url-form">
+            <h2>Ange webbplatsens URL</h2>
+            <input 
+                type="url" 
+                id="website-url" 
+                placeholder="spotifyslapped.netlify.app"
+                value="spotifyslapped.netlify.app"
+            >
+            <button onclick="loadWebsite()">Starta feedback</button>
+        </div>
+    </div>
+
+    <div id="feedback-container" class="container hidden">
+        <div class="feedback-switch">
+            <label class="switch">
+                <input type="checkbox" id="feedbackToggle" checked>
+                <span class="slider round"></span>
+            </label>
+            <span class="switch-label">Feedback-läge</span>
+        </div>
+        
+        <div class="iframe-container">
+            <iframe 
+                id="target-website" 
+                crossorigin="anonymous"
+                loading="eager"
+                style="width: 100%; height: 100%; border: none; display: block; background: white;"
+            ></iframe>
+        </div>
+        
+        <div id="feedback-form" class="feedback-form hidden">
+            <h3>Lämna feedback</h3>
+            <form id="feedbackForm">
+                <input type="hidden" id="elementInfo" name="elementInfo">
+                <textarea 
+                    name="message" 
+                    id="message" 
+                    placeholder="Skriv din feedback här..."
+                ></textarea>
+                <button type="submit">Skicka feedback</button>
+                <div id="preview-container"></div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
