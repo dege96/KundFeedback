@@ -136,8 +136,7 @@ async function handleFeedbackClick(e) {
         });
         
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(`Server error: ${errorData.details || 'Unknown error'}`);
+            throw new Error(`Server error: ${await response.text()}`);
         }
         
         const data = await response.json();

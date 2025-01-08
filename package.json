@@ -1,11 +1,21 @@
 {
-  "description": "",
+  "name": "feedback-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "powershell -File build.ps1",
+    "start": "node api/screenshot.js",
+    "dev": "nodemon api/screenshot.js"
+  },
   "dependencies": {
-    "body-parser": "^1.20.3",
-    "express": "^4.21.2",
-    "http-proxy-middleware": "^3.0.3",
-    "node-fetch": "^2.7.0",
-    "nodemailer": "^6.9.16",
-    "puppeteer": "^23.11.1"
+    "@vercel/node": "^3.0.0",
+    "chrome-aws-lambda": "^6.0.0",
+    "puppeteer-core": "^6.0.0",
+    "nodemailer": "^6.7.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
